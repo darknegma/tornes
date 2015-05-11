@@ -1,8 +1,7 @@
 <?php require_once 'head.tpl'; ?>
 
 <header id="header">
-	<?php self::add_widget('logo'); ?>	
-
+	
 </header>
 <section id="mensajes">
 	<?php if(isset($_SESSION['message'])) : echo $_SESSION['message']; unset($_SESSION['message']); endif; ?>
