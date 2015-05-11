@@ -1,0 +1,11 @@
+/*   Defaults  */
+/* line 47, ../scss/mixins.scss */
+body {
+  background-color: #f9f9f9;
+}
+
+/* line 52, ../scss/mixins.scss */
+a, a:hover {
+  text-decoration: none;
+  outline: none;
+}
