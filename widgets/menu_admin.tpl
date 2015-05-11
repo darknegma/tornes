@@ -25,18 +25,7 @@
         </ul>
       </li>
 	   
-       <li class="has-sub">
-        <a href="javascript:;">
-          <i class="fa fa-puzzle-piece"></i>
-          <b class="caret pull-right"></b>
-          <span>Convocatorias</span> 
-        </a>
-        <ul class="sub-menu">
-          <li><a href="<?php echo URL; ?>admin/calls">General</a></li>
-          <li><a href="<?php echo URL; ?>admin/add_call">Añadir convocatoria</a></li>
-        </ul>
-      </li>
-		
+
 	<?php endif; ?>
 
       <!-- begin sidebar minify button -->

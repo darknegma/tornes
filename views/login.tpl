@@ -9,7 +9,11 @@
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 	<title>Color Admin | Login Page</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<<<<<<< HEAD
+	<meta content=".::Color al cuadrado admin template::." name="description">
+=======
 	<<meta content=".::Color al cuadrado admin template::." name="description">
+>>>>>>> 536edf24eb3c5a65b8a7d12441332d1dc2625219
 	<meta name="author" content="Color al cuadrado"/>
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->

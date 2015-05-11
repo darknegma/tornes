@@ -44,6 +44,11 @@
 							<th>Nombre usuario</th>
 							<th>Email</th>
 							<th>Tipo</th>
+<<<<<<< HEAD
+							<th>Editar</th>
+							<th>Eliminar</th>
+=======
+>>>>>>> 536edf24eb3c5a65b8a7d12441332d1dc2625219
                         </tr>
                     </thead>
                     <tbody>

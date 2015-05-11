@@ -36,6 +36,7 @@
 
 	}
 
+
 	public static function change_lang($array)
 	{
 		$_SESSION['lang'] = $array['lang'];
@@ -43,10 +44,12 @@
 
 	}
 
+
 	public static function all_users()
 	{
 
-		$users = UserModel::find_by_attr();
+
+		$users[] = UserModel::find_by_attr();
 		parent::view()->create('admin_users:admin_layout', $users);	
 
 
@@ -131,7 +134,7 @@
 		 $user = UserModel::find_by_attr(array('id' => $array['id']));
 
 		 if($user) :
-		 	$user = $user[0];
+
 		 	$user['action'] = URL.'admin/update_by_user';
 
 		 	else :
