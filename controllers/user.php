@@ -108,7 +108,7 @@
 
 			if($user) :
 
-				$email        = $user[0]['email'];
+				$email        = $user['email'];
 				$new_password = self::random();
 
 
