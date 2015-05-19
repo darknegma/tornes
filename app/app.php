@@ -57,7 +57,7 @@ Class App {
 	private static function get_vars($array, $array_keys_get) {
 
 		$i = 0;
-		
+
 		foreach ($array as $k => $v):
 
 			if($is_exist = self::if_key_exist($i, $array_keys_get)) :
@@ -73,12 +73,53 @@ Class App {
 
 	}
 
+
+	private static function special_characters ($url)
+	{
+
+		if(is_numeric(strpos($url, '&'))) :
+			self::dump($url);
+			$url = strstr($url, '&', true);
+			echo 1;
+
+			return (substr($url, -1) == '/') ? str_replace('/', '', $url) : $url; 
+
+
+		endif;
+
+		if(is_numeric(strpos($url, '?'))) :
+
+			$url = strstr($url, '?', true);
+			echo 2;
+
+			return (substr($url, -1) == '/') ? str_replace('/', '', $url) : $url; 
+			
+		endif;
+
+		return $url;	
+
+	}
+
 	// Funcion que recorre el string la ruta y determina si es controlador  o vista
 	static function __content($url, $routes) {
 
+		
+		
+
 		$url = is_null(LOCAL) ? ltrim ($url, '/') : str_replace(LOCAL, "", $url);
+		
+		$url = self::special_characters($url);
+
 
 		foreach ($routes as $route => $route_val):
+
+
+		
+
+			self::dump($url);
+
+			
+
 
 			if (strpos($route, '$1')):
 
@@ -103,10 +144,13 @@ Class App {
 				endif;
 
 			endif;
+			
 
 			if ($url == $route):
 
-				self::$class = $route; 
+				self::$class = $route;
+
+
 
 				switch (key($route_val)) {
 
@@ -125,10 +169,10 @@ Class App {
 
 							endforeach;
 
-							return isset($_SESSION['user']) ? self::url_redirect(URL . 'perm') : self::url_redirect(URL);
+							return isset($_SESSION['user']) ? self::url_redirect(URL . 'acceso_denegado') : self::url_redirect(URL.'login_form');
 
 						else:
-							
+
 							return isset($get_vars) ? view::create($route_val['view'], $get_vars) : view::create($route_val['view']);
 
 						endif;
@@ -151,7 +195,7 @@ Class App {
 
 							endforeach;
 
-							return isset($_SESSION['user']) ? (URL . 'perm') : self::url_redirect(URL);
+							return isset($_SESSION['user']) ? self::url_redirect(URL . 'acceso_denegado') : self::url_redirect(URL.'login_form');
 
 						else:
 
@@ -166,7 +210,7 @@ Class App {
 			endif;
 
 		endforeach;
-
+		
 		return self::url_redirect(URL.'404');;
 
 	}
@@ -175,9 +219,9 @@ Class App {
 	static function __init() {
 
 		$url = $_SERVER['REQUEST_URI'];
-		
+
 		self::$session = (SESSION)  ? new session : false;
-		
+
 
 		return self::__content($url, self::routes());
 

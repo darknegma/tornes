@@ -129,9 +129,62 @@ Class Db {
 	}
 
 
-	public static function delete_by_id($id) {
+	public static function delete_by($array) {
 
-		$query = "DELETE FROM " . static::$table_name . " WHERE id =" . $id . " ";
+		$query = "DELETE FROM " . static::$table_name . " WHERE  ";
+
+		$count = count($array);
+		$i = 1;
+
+		foreach($array as $k => $v) :
+			if(is_array($v)) :
+
+				switch ($v['condicional']) {
+					case 'like':
+
+						$before   = (isset($v['before'])) ? $v['before'] : '';
+						$after    = (isset($v['after'])) ? $v['after'] : '';
+
+						$like_ini = ($v['like_ini'] == true) ? '%' : ''; 
+						$like_fin = ($v['like_fin'] == true) ? '%' : '';
+
+						$query .= $before.' '.$v['key'].' '.$v['condicional'].' "'.$like_ini.$v['value'].$like_fin.'" '.$v['operador'].' '.$after.' '.$v['operador']; 
+
+					break;
+					
+
+					case 'between' :
+
+						$before   = (isset($v['before'])) ? $v['before'] : '';
+						$after    = (isset($v['after'])) ? $v['after'] : '';
+
+						$query .= $before.' '.$v['key'].' '.$v['condicional'].' "'.$v['from'].'" AND "'.$v['to'].'" '.$after.' '.$v['operador']; 
+
+
+					break;
+
+					default:
+						
+						$before   = (isset($v['before'])) ? $v['before'] : '';
+						$after    = (isset($v['after'])) ? $v['after'] : '';
+
+						$query .= $before.' '.$v['key'].' '.$v['condicional'].'"'.$v['value'].'" '.$after.' '.$v['operador'];
+					break;
+				}
+
+			else :
+
+				$query .= ($i == $count) ? $k . ' = "' . $v . '" ' : $k . '= "' . $v . '" AND ';	
+
+			endif;
+		$i++;	
+		endforeach;
+
+		$query = rtrim($query, 'AND');
+
+		echo $query;
+
+		die();
 
 		$db = static::__connect();
 
@@ -263,7 +316,6 @@ Class Db {
 		// echo $nd;
 
 		$db = static::__connect();
-		$db->set_charset("utf8");
 		$result = $db->query($nd);
 
 		$res = array('result' => $result, 'db' => $db);

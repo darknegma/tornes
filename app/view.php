@@ -29,18 +29,6 @@
 			
 
 		}
-		// Mensajes
-		static function message($type, $content, $ajax)
-		{
-		
-			if($ajax) : 
-				echo  '<div class="alert alert-'.$type.'" role="alert">'.$content.'</div>';
-			else :
-				return  '<div class="alert alert-'.$type.'" role="alert">'.$content.'</div>';
-	
-			endif;
-
-		}
 		//  Titulo
 		static function __title() {
 
@@ -130,6 +118,21 @@
 
 			endif;
 		}
+
+		// Mensajes
+		static function message($type, $content, $ajax)
+		{
+		
+			if($ajax) : 
+				echo  '<div class="alert alert-'.$type.'" role="alert">'.$content.'</div>';
+			else :
+				return  '<div class="alert alert-'.$type.'" role="alert">'.$content.'</div>';
+
+			endif;
+
+		}
+
+		
 		 // Funcion que agrega un widget 
 		static function add_widget($name, $params = null) {
 
