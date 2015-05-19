@@ -114,12 +114,6 @@ Class App {
 		foreach ($routes as $route => $route_val):
 
 
-		
-
-			self::dump($url);
-
-			
-
 
 			if (strpos($route, '$1')):
 
