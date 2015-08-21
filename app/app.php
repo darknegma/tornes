@@ -66,7 +66,7 @@ Class App {
 
 				self::url_redirect(URL.'404');
 			endif;
-
+		$i++;
 		endforeach;
 
 		return isset($new_array) ? $new_array : null;
@@ -143,8 +143,6 @@ Class App {
 			if ($url == $route):
 
 				self::$class = $route;
-
-
 
 				switch (key($route_val)) {
 
